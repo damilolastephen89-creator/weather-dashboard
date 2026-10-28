@@ -1,58 +1,84 @@
-🌦️ Weather Dashboard
+# 🌦️ Weather Dashboard
 
 A modern, responsive weather dashboard that provides real-time weather conditions, multi-day forecasts, analytics, AI-powered forecasting insights, and customizable user preferences.
 
-✨ Features
+## ✨ Features
 
-🌍 Weather Data
+### 🌍 Weather Data
 
-Current weather conditions
-5-day forecast
-Temperature, humidity, wind speed
-Dynamic weather icons
-City search functionality
+- Current weather conditions
+- 5-day forecast
+- Temperature, humidity, wind speed
+- Dynamic weather icons
+- City search functionality
 
-🤖 AI Forecast Insights
+### 🤖 AI Forecast Insights
 
-Weather trend analysis
-Average temperature predictions
-Forecast confidence scoring
-Smart weather recommendations
-📊 Analytics & Visualization
-Temperature trend charts
-Rainfall analytics
-Humidity tracking
-Interactive weather visuals
-Forecast comparison metrics
-🎨 User Experience
-Light mode / Dark mode
-Responsive design
-Smooth animations
-Forecast cards
-Weather details modal
-🔐 Authentication
-Microsoft Entra ID Login
-Google Sign-In
-User preference persistence
-🌐 Deployment
-Vercel deployment support
-OpenWeather API integration
-Serverless API routes
-Tech Stack
-Frontend
-HTML5
-CSS3
-JavaScript (ES Modules)
-APIs
-OpenWeather API
-Charts
-Chart.js
-Authentication
-Microsoft Entra ID (MSAL)
-Google OAuth
-Deployment
-Vercel
-Project Structure
+- Weather trend analysis
+- Average temperature predictions
+- Forecast confidence scoring
+- Smart weather recommendations
+
+### 📊 Analytics & Visualization
+
+- Temperature trend charts
+- Rainfall analytics
+- Humidity tracking
+- Interactive weather visuals
+- Forecast comparison metrics
+
+### 🎨 User Experience
+
+- Light mode / Dark mode
+- Responsive design
+- Smooth animations
+- Forecast cards
+- Weather details modal
+
+### 🔐 Authentication
+
+- Microsoft Entra ID Login
+- Google Sign-In
+- User preference persistence
+
+### 🌐 Deployment
+
+- Vercel deployment support
+- OpenWeather API integration
+- Serverless API routes
+
+---
+
+# Tech Stack
+
+## Frontend
+
+- HTML5
+- CSS3
+- JavaScript (ES Modules)
+
+## APIs
+
+- OpenWeather API
+
+## Charts
+
+- Chart.js
+
+## Authentication
+
+- Microsoft Entra ID (MSAL)
+- Google OAuth
+
+## Deployment
+
+- Vercel
+
+---
+
+# Project Structure
+
+```text
 weather-dashboard/
 │
 ├── index.html
@@ -78,43 +104,86 @@ weather-dashboard/
 │   └── sounds/
 │
 └── .env
-Installation
+```
+
+---
+
+# Installation
+
 Clone the repository:
 
+```bash
 git clone https://github.com/yourusername/weather-dashboard.git
+```
+
 Move into the project folder:
 
+```bash
 cd weather-dashboard
+```
+
 Install dependencies:
 
+```bash
 npm install
+```
+
 Run locally:
 
+```bash
 npm run dev
-Environment Variables
-Create a .env file:
+```
 
+---
+
+# Environment Variables
+
+Create a `.env` file:
+
+```env
 VITE_OPENWEATHER_KEY=YOUR_OPENWEATHER_API_KEY
-Build
+```
+
+---
+
+# Build
+
+```bash
 npm run build
-Deployment
+```
+
+---
+
+# Deployment
+
 Deploy directly to:
 
-Vercel
-Azure Static Web Apps
-Netlify
-Future Enhancements
-Severe weather alerts
-Air quality monitoring
-Geolocation support
-Weather maps
-Machine learning forecasting
-PWA support
-Push notifications
-Contributing
+- Vercel
+- Azure Static Web Apps
+- Netlify
+
+---
+
+# Future Enhancements
+
+- Severe weather alerts
+- Air quality monitoring
+- Geolocation support
+- Weather maps
+- Machine learning forecasting
+- PWA support
+- Push notifications
+
+---
+
+# Contributing
+
 Pull requests are welcome.
 
 For major changes, please open an issue first to discuss proposed improvements.
 
-License
+---
+
+# License
+
 MIT License
