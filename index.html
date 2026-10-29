@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Weather Dashboard</title>
 
-  <link rel="stylesheet" href="css/style.css" />
+  css/style.css
 
-  <script type="module" src="js/app.js"></script>
+  js/app.jsscript>
 </head>
 
 <body>
@@ -20,8 +20,7 @@
       <input
         id="cityInput"
         type="text"
-        placeholder="Enter city name"
-      />
+        placeholder="Enter city name">
 
       <button id="searchBtn">
         Search
@@ -38,11 +37,7 @@
     <section class="current-weather">
       <h2 id="cityName">Lagos</h2>
 
-      <img
-        id="icon"
-        src=""
-        alt="Weather Icon"
-      />
+      
 
       <div id="temperature">--</div>
 
@@ -69,11 +64,20 @@
 
       <div class="chart-card">
         <h3>Temperature Trend</h3>
-
         <canvas id="tempChart"></canvas>
       </div>
 
-      <div class="chart-id="weatherModal"
+      <div class="chart-card">
+        <h3>Humidity Trend</h3>
+        <canvas id="humidityChart"></canvas>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div
+    id="weatherModal"
     class="modal">
 
     <div class="modal-content">
