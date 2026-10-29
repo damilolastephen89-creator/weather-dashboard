@@ -1,126 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Weather Dashboard</title>
+  <title>Weather Dashboard</title>
 
-<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 
-<script type="module" src="js/app.js"></script>
-
+  <script type="module" src="js/app.js"></script>
 </head>
 
 <body>
 
-<header class="header">
+  <header class="header">
+    <h1>🌦 Weather Dashboard</h1>
 
-<h1>🌦 Weather Dashboard</h1>
+    <div class="search-box">
+      <input
+        id="cityInput"
+        type="text"
+        placeholder="Enter city name"
+      />
 
-<div class="search-box">
+      <button id="searchBtn">
+        Search
+      </button>
 
-<input
-id="cityInput"
-type="text"
-placeholder="Enter city name">
+      <button id="themeToggle">
+        Theme
+      </button>
+    </div>
+  </header>
 
-<button id="searchBtn">
-Search
-</button>
+  <main>
 
-<button id="themeToggle">
-Theme
-</button>
+    <section class="current-weather">
+      <h2 id="cityName">Lagos</h2>
 
-</div>
+      <img
+        id="icon"
+        src=""
+        alt="Weather Icon"
+      />
 
-</header>
+      <div id="temperature">--</div>
 
-<main>
+      <div id="description">
+        Loading weather...
+      </div>
+    </section>
 
-<section class="current-weather">
+    <section
+      id="aiForecast"
+      class="ai-panel">
+    </section>
 
-<h2 id="cityName">
-Lagos
-</h2>
+    <section>
+      <h2>5-Day Forecast</h2>
 
-<img
-id="icon"
-alt="Weather Icon">
+      <div
+        id="forecast"
+        class="forecast-grid">
+      </div>
+    </section>
 
-<div id="temperature">
---
-</div>
+    <section class="charts">
 
-<div id="description">
-Loading...
-</div>
+      <div class="chart-card">
+        <h3>Temperature Trend</h3>
 
-</section>
+        <canvas id="tempChart"></canvas>
+      </div>
 
-<section id="aiForecast"
-class="ai-panel">
-</section>
+      <div class="chart-id="weatherModal"
+    class="modal">
 
-<section>
+    <div class="modal-content">
 
-<h2>
-5 Day Forecast
-</h2>
+      <button
+        class="close"
+        type="button">
+        ×
+      </button>
 
-<div
-id="forecast"
-class="forecast-grid">
-</div>
+      <h3>Weather Details</h3>
 
-</section>
+      <p id="modalDate"></p>
+      <p id="modalTemp"></p>
+      <p id="modalDescription"></p>
 
-<section class="charts">
+    </div>
 
-<div class="chart-card">
+  </div>
 
-<h3>
-Temperature Trend
-</h3>
-
-<canvas id="tempChart"></canvas>
-
-</div>
-
-<div class="chart-card">
-
-<h3>
-Humidity Trend
-</h3>
-
-<canvas id="humidityChart"></canvas>
-
-</div>
-
-</section>
-
-</main>
-
-<div
-id="weatherModal"
-class="modal">
-
-<div class="modal-content">
-
-<button
-class="close">
-×
-</button>
-
-<h3>
-Weather Details
-</h3>
-
-<p id="modalDate"></p>
-
-<p id="modalTemp"></p>
-
-<p id=
+</body>
+</html>
