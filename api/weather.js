@@ -1,36 +1,45 @@
-export default async function handler(
-  req,
-  res
-) {
+export default async function handler(req, res) {
+  try {
+    const city =
+      req.query.city || "Lagos";
 
-  const city =
-    req.query.city;
+    const key =
+      process.env.OPENWEATHER_API_KEY ||
+      process.env.VITE_OPENWEATHER_API_KEY;
 
-  const key =
-    process.env
-      .VITE_OPENWEATHER_KEY;
+    if (!key) {
+      return res.status(500).json({
+        error: "Missing OpenWeather API key"
+      });
+    }
 
-  const current =
-    await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`
-    );
+    const currentResponse =
+      await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=metric`
+      );
 
-  const currentData =
-    await current.json();
+    const currentData =
+      await currentResponse.json();
 
-  const forecast =
-    await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=metric`
-    );
+    const forecastResponse =
+      await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${key}&units=metric`
+      );
 
-  const forecastData =
-    await forecast.json();
+    const forecastData =
+      await forecastResponse.json();
 
-  res.status(200).json({
-    current:
-      currentData,
+    return res.status(200).json({
+      current: currentData,
+      forecast: forecastData
+    });
 
-    forecast:
-      forecastData
-  });
+  } catch (error) {
+
+    console.error(error);
+
+    return res.status(500).json({
+      error: "Failed to fetch weather data"
+    });
+  }
 }
