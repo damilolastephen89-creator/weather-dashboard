@@ -1,44 +1,42 @@
 export function initializeTheme() {
-
   const button =
     document.getElementById(
       "themeToggle"
     );
 
-  if(
+  if (!button) {
+    return;
+  }
+
+  const savedTheme =
     localStorage.getItem(
       "theme"
-    ) === "dark"
-  ) {
+    );
 
-    document.body
-      .classList
-      .add(
-        "dark-mode"
-      );
+  if (savedTheme === "dark") {
+    document.body.classList.add(
+      "dark-mode"
+    );
   }
 
   button.addEventListener(
     "click",
     () => {
 
-      document.body
-        .classList
-        .toggle(
+      document.body.classList.toggle(
+        "dark-mode"
+      );
+
+      const currentTheme =
+        document.body.classList.contains(
           "dark-mode"
-        );
+        )
+          ? "dark"
+          : "light";
 
       localStorage.setItem(
         "theme",
-
-        document.body
-          .classList
-          .contains(
-            "dark-mode"
-          )
-
-        ? "dark"
-        : "light"
+        currentTheme
       );
     }
   );
