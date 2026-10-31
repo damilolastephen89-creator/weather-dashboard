@@ -10,22 +10,26 @@ document.addEventListener(
 
     initializeModal();
 
-    document
-      .getElementById("searchBtn")
-      .addEventListener(
+    const searchBtn =
+      document.getElementById("searchBtn");
+
+    if (searchBtn) {
+      searchBtn.addEventListener(
         "click",
         async () => {
 
           const city =
             document
-              .getElementById(
-                "cityInput"
-              )
-              .value;
+              .getElementById("cityInput")
+              .value
+              .trim();
+
+          if (!city) return;
 
           await fetchWeather(city);
         }
       );
+    }
 
     await fetchWeather("Lagos");
   }
