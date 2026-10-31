@@ -2,59 +2,61 @@ import Chart from "chart.js/auto";
 
 let chart;
 
-export function renderCharts(
-  forecast
-) {
+export function renderCharts(forecast) {
 
-  const labels =
-    forecast.list
-      .slice(0, 8)
-      .map(
-        item =>
-          new Date(
-            item.dt_txt
-          )
-          .toLocaleTimeString()
-      );
+  if (!forecast || !forecast.list) {
+    return;
+  }
 
-  const temps =
-    forecast.list
-      .slice(0, 8)
-      .map(
-        item =>
-          item.main.temp
-      );
+  const labels = forecast.list
+    .slice(0, 8)
+    .map(item =>
+      new Date(item.dt_txt).toLocaleTimeString()
+    );
+
+  const temps = forecast.list
+    .slice(0, 8)
+    .map(item => item.main.temp);
+
+  const canvas =
+    document.getElementById("tempChart");
+
+  if (!canvas) {
+    return;
+  }
 
   if (chart) {
     chart.destroy();
   }
 
-  chart =
-    new Chart(
-      document.getElementById(
-        "tempChart"
-      ),
-      {
+  chart = new Chart(canvas, {
+    type: "line",
 
-      type:"line",
+    data: {
+      labels,
 
-      data:{
+      datasets: [
+        {
+          label: "Temperature (°C)",
 
-        labels,
+          data: temps,
 
-        datasets:[{
+          borderColor: "#4facfe",
 
-          label:
-            "Temperature",
+          backgroundColor:
+            "rgba(79,172,254,0.2)",
 
-          data:temps,
+          fill: true,
 
-          borderColor:
-            "#4facfe",
+          tension: 0.4
+        }
+      ]
+    },
 
-          fill:true
+    options: {
+      responsive: true,
 
-        }]
-      }
-    });
+      maintainAspectRatio: false
+    }
+  });
 }
