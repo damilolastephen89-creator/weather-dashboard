@@ -1,49 +1,51 @@
-export function renderAI(
-  forecast
-) {
+export function renderAI(forecast) {
 
-  const temps =
-    forecast.list
-      .slice(0, 5)
-      .map(
-        item =>
-          item.main.temp
-      );
+  if (!forecast || !forecast.list) {
+    return;
+  }
+
+  const temps = forecast.list
+    .slice(0, 5)
+    .map(item => item.main.temp);
+
+  if (temps.length === 0) {
+    return;
+  }
 
   const avg =
     temps.reduce(
-      (a,b)=>a+b,
+      (a, b) => a + b,
       0
     ) / temps.length;
 
   const trend =
-    temps.at(-1) >
-    temps[0]
-    ? "Warming"
-    : "Cooling";
+    temps[temps.length - 1] > temps[0]
+      ? "Warming"
+      : "Cooling";
 
-  document
-    .getElementById(
-      "aiForecast"
-    )
-    .innerHTML = `
+  const container =
+    document.getElementById("aiForecast");
 
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = `
     <div class="ai-card">
 
       <h3>
-      🤖 AI Forecast
+        🤖 AI Forecast
       </h3>
 
       <p>
-      Trend:
-      ${trend}
+        Trend: ${trend}
       </p>
 
       <p>
-      Average:
-      ${avg.toFixed(1)}°C
+        Average Temperature:
+        ${avg.toFixed(1)}°C
       </p>
 
     </div>
-    `;
+  `;
 }
