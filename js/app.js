@@ -1,6 +1,10 @@
 import { fetchWeather } from "./weather.js";
 import { initializeTheme } from "./theme.js";
 import { initializeModal } from "./modal.js";
+import {
+  initializeGeolocation
+}
+from "./geolocation.js";
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -9,7 +13,9 @@ document.addEventListener(
     initializeTheme();
 
     initializeModal();
-
+    
+    initializeGeolocation();
+    
     const searchBtn =
       document.getElementById("searchBtn");
 
@@ -32,5 +38,20 @@ document.addEventListener(
     }
 
     await fetchWeather("Lagos");
+  }
+);
+
+navigator.geolocation.getCurrentPosition(
+  position => {
+
+    fetchWeatherByCoords(
+      position.coords.latitude,
+      position.coords.longitude
+    );
+
+  },
+  () => {
+
+    fetchWeather("Lagos");
   }
 );
