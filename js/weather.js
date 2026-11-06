@@ -96,3 +96,31 @@ export async function fetchWeatherByCoords(
     );
   }
 }
+
+try {
+  updateCurrent(data.current);
+  console.log("Current weather rendered");
+} catch (e) {
+  console.error("updateCurrent failed", e);
+}
+
+try {
+  renderForecast(data.forecast);
+  console.log("Forecast rendered");
+} catch (e) {
+  console.error("renderForecast failed", e);
+}
+
+try {
+  renderCharts(data.forecast);
+  console.log("Charts rendered");
+} catch (e) {
+  console.error("renderCharts failed", e);
+}
+
+try {
+  renderAI(data.forecast);
+  console.log("AI rendered");
+} catch (e) {
+  console.error("renderAI failed", e);
+}
