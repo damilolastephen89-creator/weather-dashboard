@@ -56,3 +56,43 @@ function updateCurrent(data) {
     .src =
     `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 }
+
+export async function fetchWeatherByCoords(
+  lat,
+  lon
+) {
+
+  try {
+
+    const response =
+      await fetch(
+        `/api/weather?lat=${lat}&lon=${lon}`
+      );
+
+    const data =
+      await response.json();
+
+    updateCurrent(
+      data.current
+    );
+
+    renderForecast(
+      data.forecast
+    );
+
+    renderCharts(
+      data.forecast
+    );
+
+    renderAI(
+      data.forecast
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Location Weather Error:",
+      error
+    );
+  }
+}
