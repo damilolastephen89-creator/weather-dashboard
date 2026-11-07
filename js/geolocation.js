@@ -1,33 +1,26 @@
-// js/geolocation.js
-
 import { fetchWeatherByCoords } from "./weather.js";
 
 export function initializeGeolocation() {
+  const locationBtn =
+    document.getElementById("locationBtn");
 
-  const button =
-    document.getElementById(
-      "locationBtn"
-    );
-
-  if (!button) {
+  if (!locationBtn) {
     return;
   }
 
-  button.addEventListener(
+  locationBtn.addEventListener(
     "click",
     () => {
 
       if (!navigator.geolocation) {
-
         alert(
-          "Geolocation is not supported by your browser."
+          "Geolocation is not supported by this browser."
         );
-
         return;
       }
 
       navigator.geolocation.getCurrentPosition(
-        position => {
+        async (position) => {
 
           const lat =
             position.coords.latitude;
@@ -35,19 +28,33 @@ export function initializeGeolocation() {
           const lon =
             position.coords.longitude;
 
-          fetchWeatherByCoords(
+          console.log(
+            "Location:",
+            lat,
+            lon
+          );
+
+          await fetchWeatherByCoords(
             lat,
             lon
           );
         },
 
-        error => {
+        (error) => {
 
-          console.error(error);
+          console.error(
+            "Geolocation Error:",
+            error
+          );
 
           alert(
-            "Unable to get your location."
+            "Unable to determine your location."
           );
+        },
+
+        {
+          enableHighAccuracy: true,
+          timeout: 10000
         }
       );
     }
