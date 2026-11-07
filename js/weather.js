@@ -2,8 +2,12 @@ import { renderForecast } from "./forecast.js";
 import { renderCharts } from "./charts.js";
 import { renderAI } from "./ai.js";
 
+/**
+ * Fetch weather by city name
+ */
 export async function fetchWeather(city) {
   try {
+
     const response = await fetch(
       `/api/weather?city=${encodeURIComponent(city)}`
     );
@@ -16,61 +20,55 @@ export async function fetchWeather(city) {
 
     const data = await response.json();
 
-    updateCurrent(data.current);
+    updateCurrent(
+      data.current
+    );
 
-    renderForecast(data.forecast);
+    renderForecast(
+      data.forecast
+    );
 
-    renderCharts(data.forecast);
+    renderCharts(
+      data.forecast
+    );
 
-    renderAI(data.forecast);
+    renderAI(
+      data.forecast
+    );
 
   } catch (error) {
+
     console.error(
       "Weather Error:",
       error
     );
+
+    alert(
+      "Unable to load weather data."
+    );
   }
 }
 
-function updateCurrent(data) {
-
-  if (!data) return;
-
-  document
-    .getElementById("cityName")
-    .textContent =
-    data.name;
-
-  document
-    .getElementById("temperature")
-    .textContent =
-    `${Math.round(data.main.temp)}°C`;
-
-  document
-    .getElementById("description")
-    .textContent =
-    data.weather[0].description;
-
-  document
-    .getElementById("icon")
-    .src =
-    `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-}
-
+/**
+ * Fetch weather by coordinates
+ */
 export async function fetchWeatherByCoords(
   lat,
   lon
 ) {
-
   try {
 
-    const response =
-      await fetch(
-        `/api/weather?lat=${lat}&lon=${lon}`
-      );
+    const response = await fetch(
+      `/api/weather?lat=${lat}&lon=${lon}`
+    );
 
-    const data =
-      await response.json();
+    if (!response.ok) {
+      throw new Error(
+        `Location weather request failed: ${response.status}`
+      );
+    }
+
+    const data = await response.json();
 
     updateCurrent(
       data.current
@@ -97,30 +95,57 @@ export async function fetchWeatherByCoords(
   }
 }
 
-try {
-  updateCurrent(data.current);
-  console.log("Current weather rendered");
-} catch (e) {
-  console.error("updateCurrent failed", e);
-}
+/**
+ * Update current weather section
+ */
+function updateCurrent(data) {
 
-try {
-  renderForecast(data.forecast);
-  console.log("Forecast rendered");
-} catch (e) {
-  console.error("renderForecast failed", e);
-}
+  if (!data) {
+    return;
+  }
 
-try {
-  renderCharts(data.forecast);
-  console.log("Charts rendered");
-} catch (e) {
-  console.error("renderCharts failed", e);
-}
+  const cityName =
+    document.getElementById(
+      "cityName"
+    );
 
-try {
-  renderAI(data.forecast);
-  console.log("AI rendered");
-} catch (e) {
-  console.error("renderAI failed", e);
+  const temperature =
+    document.getElementById(
+      "temperature"
+    );
+
+  const description =
+    document.getElementById(
+      "description"
+    );
+
+  const icon =
+    document.getElementById(
+      "icon"
+    );
+
+  if (cityName) {
+    cityName.textContent =
+      data.name;
+  }
+
+  if (temperature) {
+    temperature.textContent =
+      `${Math.round(
+        data.main.temp
+      )}°C`;
+  }
+
+  if (description) {
+    description.textContent =
+      data.weather[0].description;
+  }
+
+  if (icon) {
+    icon.src =
+      `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+    icon.alt =
+      data.weather[0].description;
+  }
 }
