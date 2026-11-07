@@ -40,23 +40,12 @@ export function initializeGeolocation() {
           );
         },
 
-        (error) => {
+       (error) => {
 
-          console.error(
-            "Geolocation Error:",
-            error
-          );
+  console.error("Geolocation Error:", error);
 
-          alert(
-            "Unable to determine your location."
-          );
-        },
-
-        {
-          enableHighAccuracy: true,
-          timeout: 10000
-        }
-      );
-    }
+  alert(
+    `Error Code: ${error.code}
+Message: ${error.message}`
   );
 }
