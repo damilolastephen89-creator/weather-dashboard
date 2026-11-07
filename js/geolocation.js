@@ -11,7 +11,6 @@ export function initializeGeolocation() {
   locationBtn.addEventListener(
     "click",
     () => {
-
       if (!navigator.geolocation) {
         alert(
           "Geolocation is not supported by this browser."
@@ -21,7 +20,6 @@ export function initializeGeolocation() {
 
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-
           const lat =
             position.coords.latitude;
 
@@ -40,12 +38,23 @@ export function initializeGeolocation() {
           );
         },
 
-       (error) => {
+        (error) => {
+          console.error(
+            "Geolocation Error:",
+            error
+          );
 
-  console.error("Geolocation Error:", error);
+          alert(
+            `Error ${error.code}: ${error.message}`
+          );
+        },
 
-  alert(
-    `Error Code: ${error.code}
-Message: ${error.message}`
+        {
+          enableHighAccuracy: true,
+          timeout: 30000,
+          maximumAge: 0
+        }
+      );
+    }
   );
 }
