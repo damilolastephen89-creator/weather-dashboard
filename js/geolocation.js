@@ -1,8 +1,14 @@
-import { fetchWeatherByCoords } from "./weather.js";
+import {
+  fetchWeather,
+  fetchWeatherByCoords
+} from "./weather.js";
 
 export function initializeGeolocation() {
+
   const locationBtn =
-    document.getElementById("locationBtn");
+    document.getElementById(
+      "locationBtn"
+    );
 
   if (!locationBtn) {
     return;
@@ -11,15 +17,20 @@ export function initializeGeolocation() {
   locationBtn.addEventListener(
     "click",
     () => {
+
       if (!navigator.geolocation) {
+
         alert(
           "Geolocation is not supported by this browser."
         );
+
         return;
       }
 
       navigator.geolocation.getCurrentPosition(
+
         async (position) => {
+
           const lat =
             position.coords.latitude;
 
@@ -38,22 +49,28 @@ export function initializeGeolocation() {
           );
         },
 
-        (error) => {
+        async (error) => {
+
           console.error(
             "Geolocation Error:",
             error
           );
 
           alert(
-            `Error ${error.code}: ${error.message}`
+            `Location Error ${error.code}: ${error.message}`
+          );
+
+          await fetchWeather(
+            "Lagos"
           );
         },
 
         {
-          enableHighAccuracy: true,
+          enableHighAccuracy: false,
           timeout: 30000,
-          maximumAge: 0
+          maximumAge: 300000
         }
+
       );
     }
   );
