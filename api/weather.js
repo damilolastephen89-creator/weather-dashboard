@@ -1,14 +1,9 @@
 export default async function handler(req, res) {
   try {
-    const city =
-  req.query.city;
+    const city = req.query.city;
+    const lat = req.query.lat;
+    const lon = req.query.lon;
 
-const lat =
-  req.query.lat;
-
-const lon =
-  req.query.lon;
-    
     const key =
       process.env.OPENWEATHER_API_KEY ||
       process.env.VITE_OPENWEATHER_API_KEY;
@@ -19,39 +14,50 @@ const lon =
       });
     }
 
-   const currentUrl =
-  city
-  ?
-  `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=metric`
-  :
-  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+    let currentUrl;
+    let forecastUrl;
+
+    if (city) {
+      currentUrl =
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=metric`;
+
+      forecastUrl =
+        `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${key}&units=metric`;
+    } else if (lat && lon) {
+      currentUrl =
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+
+      forecastUrl =
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+    } else {
+      return res.status(400).json({
+        error: "Provide city or coordinates"
+      });
+    }
+
+    const currentResponse =
+      await fetch(currentUrl);
+
+    const forecastResponse =
+      await fetch(forecastUrl);
 
     const currentData =
       await currentResponse.json();
 
-    const currentUrl =
-  city
-  ?
-  `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=metric`
-  :
-  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+    const forecastData =
+      await forecastResponse.json();
 
-    const forecastUrl =
-  city
-  ?
-  `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${key}&units=metric`
-  :
-  `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+    return res.status(200).json({
+      current: currentData,
+      forecast: forecastData
+    });
 
-    const currentResponse =
-  await fetch(currentUrl);
-
-const forecastResponse =
-  await fetch(forecastUrl);
-    
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Weather API Error:",
+      error
+    );
 
     return res.status(500).json({
       error: "Failed to fetch weather data"
