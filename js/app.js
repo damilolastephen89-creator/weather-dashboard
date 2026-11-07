@@ -1,10 +1,11 @@
-import { fetchWeather } from "./weather.js";
+import {
+  fetchWeather,
+  fetchWeatherByCoords
+} from "./weather.js";
+
 import { initializeTheme } from "./theme.js";
 import { initializeModal } from "./modal.js";
-import {
-  initializeGeolocation
-}
-from "./geolocation.js";
+import { initializeGeolocation } from "./geolocation.js";
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -13,9 +14,9 @@ document.addEventListener(
     initializeTheme();
 
     initializeModal();
-    
+
     initializeGeolocation();
-    
+
     const searchBtn =
       document.getElementById("searchBtn");
 
@@ -30,28 +31,37 @@ document.addEventListener(
               .value
               .trim();
 
-          if (!city) return;
+          if (!city) {
+            return;
+          }
 
           await fetchWeather(city);
         }
       );
     }
 
-    await fetchWeather("Lagos");
-  }
-);
+    if (navigator.geolocation) {
 
-navigator.geolocation.getCurrentPosition(
-  position => {
+      navigator.geolocation.getCurrentPosition(
 
-    fetchWeatherByCoords(
-      position.coords.latitude,
-      position.coords.longitude
-    );
+        async (position) => {
 
-  },
-  () => {
+          await fetchWeatherByCoords(
+            position.coords.latitude,
+            position.coords.longitude
+          );
+        },
 
-    fetchWeather("Lagos");
+        async () => {
+
+          await fetchWeather("Lagos");
+        }
+
+      );
+
+    } else {
+
+      await fetchWeather("Lagos");
+    }
   }
 );
