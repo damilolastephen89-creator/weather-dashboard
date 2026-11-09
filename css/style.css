@@ -29,3 +29,25 @@ body {
   border-radius: 12px;
   background: #f5f5f5;
 }
+
+.favorites {
+  margin-top: 20px;
+}
+
+#favoritesList {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.favorite-city {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+#saveFavoriteBtn {
+  padding: 10px;
+}
