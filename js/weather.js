@@ -1,13 +1,16 @@
 import { renderForecast } from "./forecast.js";
 import { renderCharts } from "./charts.js";
 import { renderAI } from "./ai.js";
+import {
+  saveRecentSearch
+} from "./recent-searches.js";
 
 /**
  * Fetch weather by city name
  */
 export async function fetchWeather(city) {
   try {
-
+    
     const response = await fetch(
       `/api/weather?city=${encodeURIComponent(city)}`
     );
@@ -20,6 +23,8 @@ export async function fetchWeather(city) {
 
     const data = await response.json();
 
+    saveRecentSearch(city);
+    
     updateCurrent(
       data.current
     );
