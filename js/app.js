@@ -9,6 +9,9 @@ import { initializeGeolocation } from "./geolocation.js";
 import {
   initializeFavorites
 } from "./favorites.js";
+import {
+  initializeRecentSearches
+} from "./recent-searches.js";
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -21,6 +24,8 @@ document.addEventListener(
     initializeGeolocation();
 
     initializeFavorites();
+
+    initializeRecentSearches();
     
     const searchBtn =
       document.getElementById("searchBtn");
