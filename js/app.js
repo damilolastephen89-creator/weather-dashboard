@@ -6,6 +6,9 @@ import {
 import { initializeTheme } from "./theme.js";
 import { initializeModal } from "./modal.js";
 import { initializeGeolocation } from "./geolocation.js";
+import {
+  initializeFavorites
+} from "./favorites.js";
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -17,6 +20,8 @@ document.addEventListener(
 
     initializeGeolocation();
 
+    initializeFavorites();
+    
     const searchBtn =
       document.getElementById("searchBtn");
 
