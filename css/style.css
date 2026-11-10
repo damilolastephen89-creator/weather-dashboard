@@ -91,3 +91,23 @@ canvas {
 .dark-mode .aqi-card {
   background: #1a1a1a;
 }
+
+.alerts-panel {
+  margin-top: 20px;
+}
+
+.alert-card {
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff5f5;
+  border-left: 5px solid #ff4d4f;
+}
+
+.alert-card p {
+  margin: 8px 0;
+}
+
+.alert-card.safe {
+  background: #f6ffed;
+  border-left: 5px solid #52c41a;
+}
