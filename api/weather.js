@@ -52,8 +52,6 @@ export default async function handler(req, res) {
       forecast: forecastData
     });
 
-  } catch (error) {
-
     console.error(
       "Weather API Error:",
       error
@@ -64,3 +62,17 @@ export default async function handler(req, res) {
     });
   }
 }
+
+const airResponse =
+  await fetch(
+    `https://api.openweathermap.org/data/2.5/air_pollution?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${key}`
+  );
+
+const airData =
+  await airResponse.json();
+
+return res.status(200).json({
+  current: currentData,
+  forecast: forecastData,
+  air: airData
+});
