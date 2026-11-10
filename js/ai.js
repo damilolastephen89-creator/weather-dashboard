@@ -1,16 +1,16 @@
 export function renderAI(forecast) {
 
-  if (!forecast || !forecast.list) {
+  if (
+    !forecast ||
+    !forecast.list ||
+    !Array.isArray(forecast.list)
+  ) {
     return;
   }
 
   const temps = forecast.list
     .slice(0, 5)
     .map(item => item.main.temp);
-
-  if (temps.length === 0) {
-    return;
-  }
 
   const avg =
     temps.reduce(
@@ -23,8 +23,21 @@ export function renderAI(forecast) {
       ? "Warming"
       : "Cooling";
 
+  const rainExpected =
+    forecast.list.some(
+      item =>
+        (item.rain?.["3h"] || 0) > 0
+    );
+
+  const rainMessage =
+    rainExpected
+      ? "☔ Rain expected within the forecast period."
+      : "☀ No significant rainfall expected.";
+
   const container =
-    document.getElementById("aiForecast");
+    document.getElementById(
+      "aiForecast"
+    );
 
   if (!container) {
     return;
@@ -33,9 +46,7 @@ export function renderAI(forecast) {
   container.innerHTML = `
     <div class="ai-card">
 
-      <h3>
-        🤖 AI Forecast
-      </h3>
+      <h3>🤖 AI Forecast</h3>
 
       <p>
         Trend: ${trend}
@@ -46,17 +57,10 @@ export function renderAI(forecast) {
         ${avg.toFixed(1)}°C
       </p>
 
+      <p>
+        ${rainMessage}
+      </p>
+
     </div>
   `;
 }
-
-const rainExpected =
-  forecast.list.some(
-    item =>
-      (item.rain?.["3h"] || 0) > 0
-  );
-
-const rainMessage =
-  rainExpected
-    ? "☔ Rain expected within the forecast period."
-    : "☀ No significant rainfall expected.";
