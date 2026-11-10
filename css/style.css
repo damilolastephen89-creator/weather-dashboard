@@ -76,3 +76,18 @@ body {
 canvas {
   max-width: 100%;
 }
+
+.aqi-panel {
+  margin-top: 20px;
+}
+
+.aqi-card {
+  padding: 20px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.dark-mode .aqi-card {
+  background: #1a1a1a;
+}
