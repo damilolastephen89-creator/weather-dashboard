@@ -111,3 +111,23 @@ canvas {
   background: #f6ffed;
   border-left: 5px solid #52c41a;
 }
+
+.alert-safe {
+  background: #e8ffe8;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.alert {
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+.alert.warning {
+  background: #fff3cd;
+}
+
+.alert.severe {
+  background: #ffe5e5;
+}
