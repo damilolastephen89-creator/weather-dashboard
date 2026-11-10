@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
   try {
+
     const city = req.query.city;
     const lat = req.query.lat;
     const lon = req.query.lon;
@@ -18,18 +19,23 @@ export default async function handler(req, res) {
     let forecastUrl;
 
     if (city) {
+
       currentUrl =
         `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=metric`;
 
       forecastUrl =
         `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${key}&units=metric`;
+
     } else if (lat && lon) {
+
       currentUrl =
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
 
       forecastUrl =
         `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+
     } else {
+
       return res.status(400).json({
         error: "Provide city or coordinates"
       });
@@ -47,10 +53,29 @@ export default async function handler(req, res) {
     const forecastData =
       await forecastResponse.json();
 
+    let airData = null;
+
+    if (
+      currentData &&
+      currentData.coord
+    ) {
+
+      const airResponse =
+        await fetch(
+          `https://api.openweathermap.org/data/2.5/air_pollution?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${key}`
+        );
+
+      airData =
+        await airResponse.json();
+    }
+
     return res.status(200).json({
       current: currentData,
-      forecast: forecastData
+      forecast: forecastData,
+      air: airData
     });
+
+  } catch (error) {
 
     console.error(
       "Weather API Error:",
@@ -62,17 +87,3 @@ export default async function handler(req, res) {
     });
   }
 }
-
-const airResponse =
-  await fetch(
-    `https://api.openweathermap.org/data/2.5/air_pollution?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${key}`
-  );
-
-const airData =
-  await airResponse.json();
-
-return res.status(200).json({
-  current: currentData,
-  forecast: forecastData,
-  air: airData
-});
