@@ -149,11 +149,12 @@ function updateCurrent(data) {
       data.weather[0].description;
   }
 
- if (icon) {
+  if (icon) {
 
-  icon.src =
-    `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    icon.src =
+      `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
-  icon.alt =
-    data.weather[0].description;
+    icon.alt =
+      data.weather[0].description;
+  }
 }
