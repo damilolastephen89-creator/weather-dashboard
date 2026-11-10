@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+    content="width=device-width, initial-scale=1.0">
 
   <title>Weather Dashboard</title>
 
   <link
     rel="stylesheet"
-    href="./css/style.css"
-  >
+    href="./css/style.css">
 
   <script
     type="module"
-    src="./js/app.js"
-  ></script>
+    src="./js/app.js"></script>
 </head>
 
 <body>
@@ -31,17 +30,16 @@
       <input
         id="cityInput"
         type="text"
-        placeholder="Enter city name"
-      >
+        placeholder="Enter city name">
 
       <button id="searchBtn">
         Search
       </button>
-      
-   <button id="locationBtn">
-     📍 My Location
-   </button>
-      
+
+      <button id="locationBtn">
+        📍 My Location
+      </button>
+
       <button id="themeToggle">
         Theme
       </button>
@@ -62,8 +60,7 @@
       <img
         id="icon"
         src=""
-        alt="Weather Icon"
-      >
+        alt="Weather Icon">
 
       <div id="temperature">
         --
@@ -78,54 +75,50 @@
     <!-- AI Forecast -->
     <section
       id="aiForecast"
-      class="ai-panel"
-    ></section>
+      class="ai-panel">
+    </section>
 
-    <!-- Forecast Cards -->
+    <!-- Favorites -->
+    <section class="favorites">
+
+      <h3>
+        ⭐ Favorite Cities
+      </h3>
+
+      <div id="favoritesList"></div>
+
+      <button id="saveFavoriteBtn">
+        Save Current City
+      </button>
+
+    </section>
+
+    <!-- Recent Searches -->
+    <section class="recent-searches">
+
+      <h3>
+        🕒 Recent Searches
+      </h3>
+
+      <div id="recentSearchesList"></div>
+
+    </section>
+
+    <!-- Forecast -->
     <section>
-<div class="chart-card">
 
-  <h3>
-    Rainfall Forecast
-  </h3>
-
-  <canvas id="rainChart"></canvas>
-
-</div>
       <h2>
-        
-        <p>${rainMessage}</p>
-        
-  <section class="charts">
-
-  <div class="chart-card">
-    <h3>Temperature Trend</h3>
-    <canvas id="tempChart"></canvas>
-  </div>
-
-  <div class="chart-card">
-    <h3>Humidity Trend</h3>
-    <canvas id="humidityChart"></canvas>
-  </div>
-
-  <div class="chart-card">
-    <h3>Rainfall Forecast</h3>
-    <canvas id="rainChart"></canvas>
-  </div>
-
-</section>  
-        
         5-Day Forecast
       </h2>
 
       <div
         id="forecast"
-        class="forecast-grid"
-      ></div>
+        class="forecast-grid">
+      </div>
 
     </section>
 
-    <!-- Weather Analytics -->
+    <!-- Charts -->
     <section class="charts">
 
       <div class="chart-card">
@@ -148,6 +141,16 @@
 
       </div>
 
+      <div class="chart-card">
+
+        <h3>
+          Rainfall Forecast
+        </h3>
+
+        <canvas id="rainChart"></canvas>
+
+      </div>
+
     </section>
 
   </main>
@@ -155,15 +158,13 @@
   <!-- Weather Details Modal -->
   <div
     id="weatherModal"
-    class="modal"
-  >
+    class="modal">
 
     <div class="modal-content">
 
       <button
         class="close"
-        type="button"
-      >
+        type="button">
         ×
       </button>
 
@@ -182,24 +183,5 @@
   </div>
 
 </body>
+
 </html>
-
-<section class="favorites">
-
-  <h3>⭐ Favorite Cities</h3>
-
-  <div id="favoritesList"></div>
-
-  <button id="saveFavoriteBtn">
-    Save Current City
-  </button>
-
-</section>
-
-<section class="recent-searches">
-
-  <h3>🕒 Recent Searches</h3>
-
-  <div id="recentSearchesList"></div>
-
-</section>
