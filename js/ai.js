@@ -46,7 +46,9 @@ export function renderAI(forecast) {
   container.innerHTML = `
     <div class="ai-card">
 
-      <h3>🤖 AI Forecast</h3>
+      <h3>
+        🤖 AI Forecast
+      </h3>
 
       <p>
         Trend: ${trend}
