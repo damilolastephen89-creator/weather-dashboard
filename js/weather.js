@@ -3,6 +3,8 @@ import { renderCharts } from "./charts.js";
 import { renderAI } from "./ai.js";
 import { renderAQI } from "./aqi.js";
 import { saveRecentSearch } from "./recent-searches.js";
+import { renderAlerts }
+from "./alerts.js";
 
 /**
  * Fetch weather by city
@@ -34,6 +36,11 @@ export async function fetchWeather(city) {
 
     renderAQI(data.air);
 
+    renderAlerts(
+  data.forecast,
+  data.air
+);
+    
   } catch (error) {
 
     console.error(
@@ -78,6 +85,11 @@ export async function fetchWeatherByCoords(
 
     renderAQI(data.air);
 
+    renderAlerts(
+  data.forecast,
+  data.air
+);
+    
   } catch (error) {
 
     console.error(
