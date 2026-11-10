@@ -18,61 +18,51 @@ export function renderAlerts(
 
   const alerts = [];
 
-  forecast.list.forEach(
-    item => {
+  forecast.list.forEach(item => {
 
-      const rainfall =
-        item.rain?.["3h"] || 0;
+    const rain =
+      item.rain?.["3h"] || 0;
 
-      if (rainfall >= 5) {
-        alerts.push(
-          "⚠ Heavy rain expected."
-        );
-      }
-
-      if (
-        item.main.temp >= 35
-      ) {
-        alerts.push(
-          "🔥 High temperature alert."
-        );
-      }
-
-      if (
-        item.wind.speed >= 10
-      ) {
-        alerts.push(
-          "💨 Strong wind warning."
-        );
-      }
+    if (rain >= 10) {
+      alerts.push({
+        level: "severe",
+        message:
+          "🌧 Heavy rainfall expected."
+      });
     }
-  );
+
+    if (item.main.temp >= 38) {
+      alerts.push({
+        level: "warning",
+        message:
+          "🔥 Extreme heat expected."
+      });
+    }
+
+    if (item.wind.speed >= 12) {
+      alerts.push({
+        level: "warning",
+        message:
+          "💨 Strong winds expected."
+      });
+    }
+  });
 
   if (
-    airData &&
-    airData.list &&
-    airData.list[0]
+    airData?.list?.[0]?.main?.aqi >= 4
   ) {
 
-    const aqi =
-      airData.list[0].main.aqi;
-
-    if (aqi >= 4) {
-      alerts.push(
+    alerts.push({
+      level: "warning",
+      message:
         "🌫 Poor air quality detected."
-      );
-    }
+    });
   }
 
-  const uniqueAlerts =
-    [...new Set(alerts)];
-
-  if (
-    uniqueAlerts.length === 0
-  ) {
+  if (alerts.length === 0) {
 
     container.innerHTML = `
-      <div class="alert-card safe">
+      <div class="alert-safe">
         ✅ No weather alerts.
       </div>
     `;
@@ -81,16 +71,18 @@ export function renderAlerts(
   }
 
   container.innerHTML = `
-    <div class="alert-card">
+    <div class="alerts-card">
 
       <h3>
         ⚠ Weather Alerts
       </h3>
 
-      ${uniqueAlerts
+      ${alerts
         .map(
           alert =>
-            `<p>${alert}</p>`
+          `<div class="alert ${alert.level}">
+            ${alert.message}
+          </div>`
         )
         .join("")}
 
