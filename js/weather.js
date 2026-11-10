@@ -5,6 +5,9 @@ import {
   saveRecentSearch
 } from "./recent-searches.js";
 
+import { renderAQI }
+from "./aqi.js";
+
 /**
  * Fetch weather by city name
  */
@@ -40,8 +43,6 @@ export async function fetchWeather(city) {
     renderAI(
       data.forecast
     );
-
-  } catch (error) {
 
     console.error(
       "Weather Error:",
@@ -91,6 +92,8 @@ export async function fetchWeatherByCoords(
       data.forecast
     );
 
+    renderAQI(data.air);
+    
   } catch (error) {
 
     console.error(
