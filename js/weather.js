@@ -1,19 +1,15 @@
 import { renderForecast } from "./forecast.js";
 import { renderCharts } from "./charts.js";
 import { renderAI } from "./ai.js";
-import {
-  saveRecentSearch
-} from "./recent-searches.js";
-
-import { renderAQI }
-from "./aqi.js";
+import { renderAQI } from "./aqi.js";
+import { saveRecentSearch } from "./recent-searches.js";
 
 /**
- * Fetch weather by city name
+ * Fetch weather by city
  */
 export async function fetchWeather(city) {
   try {
-    
+
     const response = await fetch(
       `/api/weather?city=${encodeURIComponent(city)}`
     );
@@ -27,22 +23,18 @@ export async function fetchWeather(city) {
     const data = await response.json();
 
     saveRecentSearch(city);
-    
-    updateCurrent(
-      data.current
-    );
 
-    renderForecast(
-      data.forecast
-    );
+    updateCurrent(data.current);
 
-    renderCharts(
-      data.forecast
-    );
+    renderForecast(data.forecast);
 
-    renderAI(
-      data.forecast
-    );
+    renderCharts(data.forecast);
+
+    renderAI(data.forecast);
+
+    renderAQI(data.air);
+
+  } catch (error) {
 
     console.error(
       "Weather Error:",
@@ -76,29 +68,25 @@ export async function fetchWeatherByCoords(
 
     const data = await response.json();
 
-    updateCurrent(
-      data.current
-    );
+    updateCurrent(data.current);
 
-    renderForecast(
-      data.forecast
-    );
+    renderForecast(data.forecast);
 
-    renderCharts(
-      data.forecast
-    );
+    renderCharts(data.forecast);
 
-    renderAI(
-      data.forecast
-    );
+    renderAI(data.forecast);
 
     renderAQI(data.air);
-    
+
   } catch (error) {
 
     console.error(
       "Location Weather Error:",
       error
+    );
+
+    alert(
+      "Unable to load location weather."
     );
   }
 }
