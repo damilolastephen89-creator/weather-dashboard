@@ -49,3 +49,14 @@ export function renderAI(forecast) {
     </div>
   `;
 }
+
+const rainExpected =
+  forecast.list.some(
+    item =>
+      (item.rain?.["3h"] || 0) > 0
+  );
+
+const rainMessage =
+  rainExpected
+    ? "☔ Rain expected within the forecast period."
+    : "☀ No significant rainfall expected.";
