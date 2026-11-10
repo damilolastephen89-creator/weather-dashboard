@@ -68,3 +68,11 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
+
+.chart-card {
+  min-height: 350px;
+}
+
+canvas {
+  max-width: 100%;
+}
