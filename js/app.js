@@ -28,6 +28,8 @@ document.addEventListener(
     initializeFavorites();
 
     initializeRecentSearches();
+
+    initializePWA();
     
     const searchBtn =
       document.getElementById("searchBtn");
