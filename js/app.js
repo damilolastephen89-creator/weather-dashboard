@@ -12,6 +12,8 @@ import {
 import {
   initializeRecentSearches
 } from "./recent-searches.js";
+import { initializePWA }
+from "./pwa.js";
 
 document.addEventListener(
   "DOMContentLoaded",
