@@ -1,12 +1,10 @@
 {
   "name": "Weather Dashboard",
   "short_name": "Weather",
-  "description": "Weather Dashboard with forecasts, AQI, alerts and charts",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4facfe",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "/icon-192.png",
