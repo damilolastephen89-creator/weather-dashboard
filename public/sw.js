@@ -1,22 +1,13 @@
 const CACHE_NAME = "weather-dashboard-v1";
 
-self.addEventListener(
-  "install",
-  event => {
-    event.waitUntil(
-      caches.open(CACHE_NAME)
-    );
-  }
-);
+self.addEventListener("install", () => {
+  console.log("SW Installed");
+});
 
-self.addEventListener(
-  "fetch",
-  event => {
-    event.respondWith(
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    fetch(event.request).catch(() =>
       caches.match(event.request)
-        .then(response => {
-          return response || fetch(event.request);
-        })
-    );
-  }
-);
+    )
+  );
+});
