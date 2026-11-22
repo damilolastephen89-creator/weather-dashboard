@@ -5,6 +5,9 @@ import { renderAQI } from "./aqi.js";
 import { saveRecentSearch } from "./recent-searches.js";
 import { renderAlerts }
 from "./alerts.js";
+import {
+  updateMap
+} from "./map.js";
 
 /**
  * Fetch weather by city
@@ -89,7 +92,12 @@ export async function fetchWeatherByCoords(
   data.forecast,
   data.air
 );
-    
+
+    updateMap(
+  data.current.coord.lat,
+  data.current.coord.lon,
+  data.current.name
+);
   } catch (error) {
 
     console.error(
