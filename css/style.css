@@ -132,8 +132,13 @@ canvas {
   background: #ffe5e5;
 }
 
+.map-section {
+  margin-top: 30px;
+}
+
 #weatherMap {
   height: 500px;
+  width: 100%;
   border-radius: 12px;
   overflow: hidden;
 }
