@@ -15,6 +15,10 @@ import {
 import { initializePWA }
 from "./pwa.js";
 
+import {
+  initializeMap
+} from "./map.js";
+
 document.addEventListener(
   "DOMContentLoaded",
   async () => {
@@ -30,6 +34,8 @@ document.addEventListener(
     initializeRecentSearches();
 
     initializePWA();
+
+    initializeMap();
     
     const searchBtn =
       document.getElementById("searchBtn");
