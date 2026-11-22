@@ -131,3 +131,9 @@ canvas {
 .alert.severe {
   background: #ffe5e5;
 }
+
+#weatherMap {
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+}
