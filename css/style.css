@@ -142,3 +142,17 @@ canvas {
   border-radius: 12px;
   overflow: hidden;
 }
+
+.map-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.map-controls button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
