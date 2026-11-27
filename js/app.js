@@ -21,6 +21,7 @@ import {
 
 import {
   login,
+  logout,
   renderUser
 } from "./auth.js";
 
@@ -42,15 +43,6 @@ document.addEventListener(
 
     initializeMap();
     
-renderUser();
-
-document
-  .getElementById("loginBtn")
-  ?.addEventListener(
-    "click",
-    login
-  );
-    
     const searchBtn =
       document.getElementById("searchBtn");
 
@@ -65,6 +57,27 @@ document
               .value
               .trim();
 
+          renderUser();
+
+document
+  .getElementById("loginBtn")
+  ?.addEventListener(
+    "click",
+    () => {
+
+      const user =
+        localStorage.getItem(
+          "weatherUser"
+        );
+
+      if (user) {
+        logout();
+      } else {
+        login();
+      }
+
+    }
+  );
           if (!city) {
             return;
           }
