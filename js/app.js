@@ -6,18 +6,10 @@ import {
 import { initializeTheme } from "./theme.js";
 import { initializeModal } from "./modal.js";
 import { initializeGeolocation } from "./geolocation.js";
-import {
-  initializeFavorites
-} from "./favorites.js";
-import {
-  initializeRecentSearches
-} from "./recent-searches.js";
-import { initializePWA }
-from "./pwa.js";
-
-import {
-  initializeMap
-} from "./map.js";
+import { initializeFavorites } from "./favorites.js";
+import { initializeRecentSearches } from "./recent-searches.js";
+import { initializePWA } from "./pwa.js";
+import { initializeMap } from "./map.js";
 
 import {
   login,
@@ -42,42 +34,47 @@ document.addEventListener(
     initializePWA();
 
     initializeMap();
-    
+
+    renderUser();
+
+    document
+      .getElementById("loginBtn")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          const user =
+            localStorage.getItem(
+              "weatherUser"
+            );
+
+          if (user) {
+            logout();
+          } else {
+            login();
+          }
+        }
+      );
+
     const searchBtn =
-      document.getElementById("searchBtn");
+      document.getElementById(
+        "searchBtn"
+      );
 
     if (searchBtn) {
+
       searchBtn.addEventListener(
         "click",
         async () => {
 
           const city =
             document
-              .getElementById("cityInput")
+              .getElementById(
+                "cityInput"
+              )
               .value
               .trim();
 
-          renderUser();
-
-document
-  .getElementById("loginBtn")
-  ?.addEventListener(
-    "click",
-    () => {
-
-      const user =
-        localStorage.getItem(
-          "weatherUser"
-        );
-
-      if (user) {
-        logout();
-      } else {
-        login();
-      }
-
-    }
-  );
           if (!city) {
             return;
           }
@@ -87,28 +84,37 @@ document
       );
     }
 
-    if (navigator.geolocation) {
+    if (
+      navigator.geolocation
+    ) {
 
-      navigator.geolocation.getCurrentPosition(
+      navigator.geolocation
+        .getCurrentPosition(
 
-        async (position) => {
+          async (
+            position
+          ) => {
 
-          await fetchWeatherByCoords(
-            position.coords.latitude,
-            position.coords.longitude
-          );
-        },
+            await fetchWeatherByCoords(
+              position.coords.latitude,
+              position.coords.longitude
+            );
+          },
 
-        async () => {
+          async () => {
 
-          await fetchWeather("Lagos");
-        }
+            await fetchWeather(
+              "Lagos"
+            );
+          }
 
-      );
+        );
 
     } else {
 
-      await fetchWeather("Lagos");
+      await fetchWeather(
+        "Lagos"
+      );
     }
   }
 );
