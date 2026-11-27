@@ -19,6 +19,11 @@ import {
   initializeMap
 } from "./map.js";
 
+import {
+  login,
+  renderUser
+} from "./auth.js";
+
 document.addEventListener(
   "DOMContentLoaded",
   async () => {
@@ -36,6 +41,15 @@ document.addEventListener(
     initializePWA();
 
     initializeMap();
+    
+renderUser();
+
+document
+  .getElementById("loginBtn")
+  ?.addEventListener(
+    "click",
+    login
+  );
     
     const searchBtn =
       document.getElementById("searchBtn");
